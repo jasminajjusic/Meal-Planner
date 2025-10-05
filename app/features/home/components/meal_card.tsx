@@ -20,7 +20,7 @@ const MealCard: React.FC<Props> = ({ meal }) => {
         </Text>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push(`../recipe/${meal.idMeal}`)}
+          onPress={() => router.push(`./screens/recipe?id=${meal.idMeal}`)}
         >
           <Text style={styles.buttonText}>View Recipe</Text>
         </TouchableOpacity>
