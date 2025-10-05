@@ -1,50 +1,51 @@
-# Welcome to your Expo app 👋
+🍽️ Meal Planner App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Meal Planner is a React Native mobile app that helps users plan meals, discover recipes, generate AI-powered meal plans, and manage a shopping list. It’s built with modern mobile and full-stack technologies, showcasing both frontend and backend skills.
 
-## Get started
+🚀 Features
 
-1. Install dependencies
+Authentication & State Management
 
-   ```bash
-   npm install
-   ```
+User registration and login implemented with Firebase Authentication.
+Global state managed with Zustand for efficient and reactive state updates.
 
-2. Start the app
+Home Screen & Recipe Management
 
-   ```bash
-   npx expo start
-   ```
+Fetches recipes from a custom Node.js + Express backend API.
+Supports search and filtering for recipes.
+Click on a recipe to view detailed info (ingredients, instructions).
+Users can save recipes as favorites using Zustand state.
 
-In the output, you'll find options to open the app in a
+AI-Powered Recipe Generation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Generate recipes from user-provided ingredients via Cohere AI API.
+Backend handles the API requests and returns structured recipe data.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Meal Plan Generation
 
-## Get a fresh project
+Generate meal plans for any number of days.
+AI-generated plans include breakfast, lunch, and dinner for each day.
+Backend parses AI response into structured JSON for frontend consumption.
 
-When you're ready, run:
+Shopping List Management
+Users can add, remove, and mark ingredients as bought.
+List is reactive using Zustand, ensuring state persists while navigating app.
 
-```bash
-npm run reset-project
-```
+💻 Tech Stack
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Frontend
 
-## Learn more
+React Native: Cross-platform mobile development (iOS & Android).
+Expo: Simplifies development and testing.
+React Navigation: Tab and stack navigation for smooth user experience.
+Zustand: Lightweight state management for recipes, meal plans, and shopping list.
 
-To learn more about developing your project with Expo, look at the following resources:
+Backend
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Node.js + Express: RESTful API to handle recipe & meal plan requests.
+Cohere AI API: Generate recipes and meal plans from user inputs.
+CORS & dotenv: Secure environment variables and API integration.
 
-## Join the community
+Database & Authentication
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Firebase: Authentication, user management, and potential Firestore integration for persistent data.
