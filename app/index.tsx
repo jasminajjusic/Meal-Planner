@@ -39,7 +39,7 @@ export default function WelcomeScreen() {
               styles.button,
               { backgroundColor: "#4B5563", marginTop: 16 },
             ]}
-            onPress={() => router.push("../register")}
+            onPress={() => router.push("/features/auth/screens/register")}
           >
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
