@@ -1,4 +1,4 @@
-🍽️ Meal Planner App
+ Meal Planner App
 
 Meal Planner is a React Native mobile app that helps users plan meals, discover recipes, generate AI-powered meal plans, and manage a shopping list. It’s built with modern mobile and full-stack technologies, showcasing both frontend and backend skills.
 
@@ -31,7 +31,7 @@ Backend parses AI response into structured JSON for frontend consumption.
 Users can add, remove, and mark ingredients as bought.
 List is reactive using Zustand, ensuring state persists while navigating app.
 
-#💻 Tech Stack
+# Tech Stack
 
 #Frontend
 
@@ -50,11 +50,11 @@ CORS & dotenv: Secure environment variables and API integration.
 
 Firebase: Authentication, user management, and potential Firestore integration for persistent data.
 
-## 📸 Screenshots
+##  Screenshots
 
 Here is an example of the app:
 
 ![App Screenshot](assets/images/meal-planner.png)
 
-👉 More  screens are available on the following Figma link:  
+ More  screens are available on the following Figma link:  
 [Figma Project Link](https://www.figma.com/design/6sQzlMvR4Bnss37lPkonwG/meal-planner?node-id=0-1&p=f&t=tLLmw9Je6bzMtb6Z-0)
