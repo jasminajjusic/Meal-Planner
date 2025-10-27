@@ -46,6 +46,7 @@ The app uses Firebase for authentication and database management, and Zustand fo
 
 ### Frontend
 - React Native (Expo)
+- Expo Go – used for running and testing the app on mobile devices  
 - Zustand – State management
 - Firebase Auth + Firestore
 - React Navigation
