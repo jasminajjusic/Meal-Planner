@@ -1,54 +1,77 @@
- Meal Planner App
+# Meal Planner – React Native App
 
-Meal Planner is a React Native mobile app that helps users plan meals, discover recipes, generate AI-powered meal plans, and manage a shopping list. It’s built with modern mobile and full-stack technologies, showcasing both frontend and backend skills.
+Meal Planner is a mobile application built with React Native that allows users to search, filter, and save recipes, generate AI-based recipes and meal plans, and manage a personal shopping list.  
+The app uses Firebase for authentication and database management, and Zustand for state management.
 
-# Features
+---
 
-# Authentication & State Management
+## Features
 
-User registration and login implemented with Firebase Authentication.
-Global state managed with Zustand for efficient and reactive state updates.
+### Authentication
+- User registration and login via Firebase Authentication  
+- User data stored in Firestore
 
-# Home Screen & Recipe Management
+### Home Screen
+- Displays popular recipes loaded from an external API  
+- Allows searching and filtering recipes by name or category  
+- Clicking on a recipe opens the Recipe Details Screen
 
-Fetches recipes from a custom Node.js + Express backend API.
-Supports search and filtering for recipes.
-Click on a recipe to view detailed info (ingredients, instructions).
-Users can save recipes as favorites using Zustand state.
+### Recipe Details
+- Displays recipe ingredients, instructions, and image  
+- "Add to Favorites" button to save recipes  
+- "Share" button for sharing recipes with others
 
-# AI-Powered Recipe Generation
+### AI Recipe Generator
+- User inputs available ingredients  
+- Backend uses the Cohere AI API to generate a unique recipe  
+- The generated recipe is displayed in the app
 
-Generate recipes from user-provided ingredients via Cohere AI API.
-Backend handles the API requests and returns structured recipe data.
+### AI Meal Plan Generator
+- User enters the number of days and optional dietary preferences  
+- The app generates a meal plan (breakfast, lunch, dinner) for each day  
+- The output is formatted in JSON and displayed in the app
 
-# Meal Plan Generation
+### Shopping List
+- Create, edit, and delete shopping list items  
+- Mark items as purchased / not purchased  
+- List is stored locally or in Firestore
 
-Generate meal plans for any number of days.
-AI-generated plans include breakfast, lunch, and dinner for each day.
-Backend parses AI response into structured JSON for frontend consumption.
+### Favorites
+- View all saved favorite recipes  
+- Remove favorites with a single click
 
-# Shopping List Management
-Users can add, remove, and mark ingredients as bought.
-List is reactive using Zustand, ensuring state persists while navigating app.
+---
 
-# Tech Stack
+## Technologies
 
-#Frontend
+### Frontend
+- React Native (Expo)
+- Zustand – State management
+- Firebase Auth + Firestore
+- React Navigation
+- Cohere API (AI text generation)
+- Axios / Fetch API – API calls
 
-React Native: Cross-platform mobile development (iOS & Android).
-Expo: Simplifies development and testing.
-React Navigation: Tab and stack navigation for smooth user experience.
-Zustand: Lightweight state management for recipes, meal plans, and shopping list.
+### Backend
+- Node.js + Express
+- Cohere AI SDK
+- dotenv – Environment variable management
+- CORS – Enables cross-origin requests from the mobile app
 
-# Backend
+---
 
-Node.js + Express: RESTful API to handle recipe & meal plan requests.
-Cohere AI API: Generate recipes and meal plans from user inputs.
-CORS & dotenv: Secure environment variables and API integration.
+## Project Structure
 
-# Database & Authentication
+The project follows a modular feature-based structure.  
+The main application code is located inside the `app/` directory, which contains the following folders:
 
-Firebase: Authentication, user management, and potential Firestore integration for persistent data.
+- `tabs/` – main navigation tabs of the application  
+- `features/` – organized by feature modules such as `home`, `auth`, `ai`, `favorites`, `shopping`, and `profile`  
+- `store/` – Zustand stores for managing global state  
+- `firebase/` – Firebase configuration and database setup  
+- `assets/` – static files such as images and icons  
+
+At the root level, there is also a `server/` folder that contains the backend built with Node.js and Express, responsible for handling AI-based recipe and meal plan generation through the Cohere API.
 
 ##  Screenshots
 
