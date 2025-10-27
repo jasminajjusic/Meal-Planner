@@ -1,11 +1,4 @@
-import {
-  Alert,
-  Share,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useFavoritesStore } from "./../stores/favorites_store";
 import { Recipe } from "./recipe_types";
 
@@ -14,46 +7,24 @@ type Props = {
 };
 
 const RecipeButtons: React.FC<Props> = ({ recipe }) => {
-  const { toggleFavorite, isFavorite } = useFavoritesStore();
+  const { isFavorite, handleFavorite, shareRecipe } = useFavoritesStore();
   const favorite = isFavorite(recipe.idMeal);
-
-  const handleFavorite = async () => {
-    await toggleFavorite(recipe.idMeal);
-    Alert.alert(favorite ? "Removed from favorites" : "Added to favorites");
-  };
-
-  const shareRecipe = async () => {
-    try {
-      const message = `🍽️ Check out this recipe: ${recipe.strMeal}
-
-Ingredients:
-${Object.keys(recipe)
-  .filter((key) => key.startsWith("strIngredient") && recipe[key])
-  .map((key) => `• ${recipe[key]}`)
-  .join("\n")}
-
-${recipe.strSource ? `Read more: ${recipe.strSource}` : ""}
-`;
-
-      await Share.share({
-        message,
-        url: recipe.strMealThumb,
-        title: `Recipe: ${recipe.strMeal}`,
-      });
-    } catch (error) {
-      console.error("Error sharing recipe:", error);
-      Alert.alert("Error", "Something went wrong while sharing the recipe.");
-    }
-  };
 
   return (
     <View style={styles.buttonsRow}>
-      <TouchableOpacity style={styles.button} onPress={handleFavorite}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => handleFavorite(recipe.idMeal)}
+      >
         <Text style={styles.buttonText}>
           {favorite ? "♥ Favorite" : "♡ Favorite"}
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={shareRecipe}>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => shareRecipe(recipe)}
+      >
         <Text style={styles.buttonText}>Share</Text>
       </TouchableOpacity>
     </View>
@@ -76,5 +47,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
   },
-  buttonText: { color: "#fff", fontWeight: "600", fontSize: 16 },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "600",
+    fontSize: 16,
+  },
 });

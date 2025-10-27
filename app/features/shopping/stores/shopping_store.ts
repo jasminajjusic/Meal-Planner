@@ -1,4 +1,3 @@
-// stores/shopping_store.ts
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { create } from "zustand";
 

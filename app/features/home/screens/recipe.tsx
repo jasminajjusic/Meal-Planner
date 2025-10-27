@@ -14,7 +14,7 @@ import RecipeInstructions from "./../components/recipe_instructions";
 import { Recipe } from "./../components/recipe_types";
 
 const RecipeScreen = () => {
-  const { id } = useLocalSearchParams<{ id: string }>(); // 👈 ovo je ključno
+  const { id } = useLocalSearchParams<{ id: string }>();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [favorite, setFavorite] = useState(false);
@@ -34,7 +34,7 @@ const RecipeScreen = () => {
       }
     };
 
-    if (id) fetchRecipe(); // 👈 da ne puca ako id nije još učitan
+    if (id) fetchRecipe();
   }, [id]);
 
   if (loading)

@@ -1,4 +1,3 @@
-// ShoppingScreen.tsx
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -28,7 +27,7 @@ export default function ShoppingScreen() {
   const [newIngredient, setNewIngredient] = useState("");
 
   useEffect(() => {
-    fetchIngredients(); // učitaj listu iz Firestore
+    fetchIngredients();
   }, []);
 
   const handleAdd = async () => {

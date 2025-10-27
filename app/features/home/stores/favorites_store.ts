@@ -1,72 +1,53 @@
-// store/useFavoritesStore.ts
-import { getAuth } from "firebase/auth";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { Alert, Share } from "react-native";
 import { create } from "zustand";
-import { db } from "../../../../firebaseConfig";
+import { Recipe } from "../components/recipe_types";
 
 type FavoritesState = {
   favorites: string[];
-  loading: boolean;
-  loadFavorites: () => Promise<void>;
-  toggleFavorite: (mealId: string) => Promise<void>;
-  isFavorite: (mealId: string) => boolean;
+  isFavorite: (id: string) => boolean;
+  toggleFavorite: (id: string) => void;
+  handleFavorite: (id: string) => Promise<void>;
+  shareRecipe: (recipe: Recipe) => Promise<void>;
 };
 
 export const useFavoritesStore = create<FavoritesState>((set, get) => ({
   favorites: [],
-  loading: false,
 
-  loadFavorites: async () => {
-    const user = getAuth().currentUser;
-    if (!user) return;
+  isFavorite: (id) => get().favorites.includes(id),
 
-    set({ loading: true });
-    try {
-      const ref = doc(db, "users", user.uid);
-      const snap = await getDoc(ref);
+  toggleFavorite: (id) =>
+    set((state) => ({
+      favorites: state.favorites.includes(id)
+        ? state.favorites.filter((fav) => fav !== id)
+        : [...state.favorites, id],
+    })),
 
-      if (snap.exists()) {
-        set({ favorites: snap.data().favorites || [] });
-      }
-    } catch (e) {
-      console.error("Error loading favorites:", e);
-    } finally {
-      set({ loading: false });
-    }
+  handleFavorite: async (id) => {
+    const favorite = get().isFavorite(id);
+    get().toggleFavorite(id);
+    Alert.alert(favorite ? "Removed from favorites" : "Added to favorites");
   },
 
-  toggleFavorite: async (mealId) => {
-    const user = getAuth().currentUser;
-    if (!user) return;
-
-    const ref = doc(db, "users", user.uid);
-    const currentFavorites = get().favorites;
-
-    const alreadyFav = currentFavorites.includes(mealId);
-
+  shareRecipe: async (recipe) => {
     try {
-      if (alreadyFav) {
-        await updateDoc(ref, { favorites: arrayRemove(mealId) });
-        set({ favorites: currentFavorites.filter((id) => id !== mealId) });
-      } else {
-        await updateDoc(ref, { favorites: arrayUnion(mealId) });
-        set({ favorites: [...currentFavorites, mealId] });
-      }
-    } catch (e) {
-      // ako dokument ne postoji — kreiraj ga
-      if (!alreadyFav) {
-        await setDoc(ref, { favorites: [mealId] }, { merge: true });
-        set({ favorites: [...currentFavorites, mealId] });
-      }
+      const message = ` Check out this recipe: ${recipe.strMeal}
+
+Ingredients:
+${Object.keys(recipe)
+  .filter((key) => key.startsWith("strIngredient") && recipe[key])
+  .map((key) => `• ${recipe[key]}`)
+  .join("\n")}
+
+${recipe.strSource ? `Read more: ${recipe.strSource}` : ""}`;
+
+      await Share.share({
+        message,
+        url: recipe.strMealThumb,
+        title: `Recipe: ${recipe.strMeal}`,
+      });
+    } catch (error) {
+      console.error("Error sharing recipe:", error);
+      Alert.alert("Error", "Something went wrong while sharing the recipe.");
     }
   },
-
-  isFavorite: (mealId) => get().favorites.includes(mealId),
 }));
