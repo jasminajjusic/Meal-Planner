@@ -67,9 +67,8 @@ The project follows a modular feature-based structure.
 The main application code is located inside the `app/` directory, which contains the following folders:
 
 - `tabs/` – main navigation tabs of the application  
-- `features/` – organized by feature modules such as `home`, `auth`, `ai`, `favorites`, `shopping`, and `profile`  
-- `store/` – Zustand stores for managing global state  
-- `firebase/` – Firebase configuration and database setup  
+- `features/` – organized by feature modules such as `home`, `auth`, `meal_plan`, `recipes`, `shopping` 
+- `store/` – Zustand stores for managing global state   
 - `assets/` – static files such as images and icons  
 
 At the root level, there is also a `server/` folder that contains the backend built with Node.js and Express, responsible for handling AI-based recipe and meal plan generation through the Cohere API.
