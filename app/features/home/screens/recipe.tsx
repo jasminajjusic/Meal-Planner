@@ -54,11 +54,8 @@ const RecipeScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <RecipeHeader recipe={recipe} />
-      <RecipeButtons
-        recipe={recipe}
-        favorite={favorite}
-        setFavorite={setFavorite}
-      />
+      <RecipeButtons recipe={recipe} />
+
       <RecipeIngredients recipe={recipe} />
       <RecipeInstructions recipe={recipe} />
     </ScrollView>

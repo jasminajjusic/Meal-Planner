@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -10,7 +9,7 @@ import {
 import CategoryTabs from "../features/home/components/category_tabs";
 import MealCard from "../features/home/components/meal_card";
 import SearchBar from "../features/home/components/search_bar";
-import { useMealStore } from "../features/home/stores/meal_store";
+import { Meal, useMealStore } from "../features/home/stores/meal_store";
 import useUserStore from "../features/home/stores/user_store";
 
 const categories = ["All", "Dessert", "Breakfast", "Lunch", "Dinner"];
@@ -39,27 +38,31 @@ const HomeScreen: React.FC = () => {
   if (loadingMeals || loadingUser) return <Loading />;
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.greetingContainer}>
-        <Text style={styles.greetingText}>
-          {userName ? `Hello, ${userName}! ` : "Hello! "}
-        </Text>
-        <Text style={styles.subGreetingText}>Find your favorite recipes</Text>
-      </View>
+    <FlatList<Meal>
+      data={filteredMeals}
+      keyExtractor={(item) => item.idMeal}
+      renderItem={({ item }) => <MealCard meal={item} />}
+      ListHeaderComponent={
+        <>
+          <View style={styles.greetingContainer}>
+            <Text style={styles.greetingText}>
+              {userName ? `Hello, ${userName}!` : "Hello!"}
+            </Text>
+            <Text style={styles.subGreetingText}>
+              Find your favorite recipes
+            </Text>
+          </View>
 
-      <SearchBar value={search} onChangeText={setSearch} />
-      <CategoryTabs
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-      />
-
-      <FlatList
-        data={filteredMeals}
-        keyExtractor={(item) => item.idMeal}
-        renderItem={({ item }) => <MealCard meal={item} />}
-      />
-    </ScrollView>
+          <SearchBar value={search} onChangeText={setSearch} />
+          <CategoryTabs
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+        </>
+      }
+      contentContainerStyle={styles.container}
+    />
   );
 };
 
@@ -74,7 +77,6 @@ const Loading: React.FC = () => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#f9fafb",
     padding: 16,
     paddingTop: 60,

@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Meal } from "./types";
+
+import { Meal } from "../stores/meal_store";
 
 interface Props {
   meal: Meal;
