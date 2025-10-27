@@ -77,7 +77,7 @@ At the root level, there is also a `server/` folder that contains the backend bu
 
 Here is an example of the app:
 
-![App Screenshot](assets/images/meal-planner.png)
+![App Screenshot](assets/images/meal_plannner_picture.png)
 
  More  screens are available on the following Figma link:  
 [Figma Project Link](https://www.figma.com/design/6sQzlMvR4Bnss37lPkonwG/meal-planner?node-id=0-1&p=f&t=tLLmw9Je6bzMtb6Z-0)
